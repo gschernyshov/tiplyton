@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  BANNED
+}
+
+enum DonationStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id                String     @id @default(uuid())
+  name              String
+  photoUrl          String     @map("photo_url")
+  email             String     @unique
+  password          String
+  description       String?    
+  tgId              String     @unique @map("tg_id")
+  username          String
+
+  status            Status     @default(ACTIVE)
+  role              Role       @default(USER)
+
+  createdAt         DateTime   @default(now()) @map("created_at")
+  updatedAt         DateTime   @updatedAt @map("updated_at")
+
+  donationsSent     Donation[] @relation("donation_sender")
+  donationsReceived Donation[] @relation("donation_receiver")
+  favorites         Favorite[]
+  likes             Like[]
+  posts             Post[]
+
+  @@map("users")
+}
+
+model Post {
+  id                  String     @id @default(uuid())
+  authorId            String     @map("author_id")
+  authorAddressWallet String     @map("author_address_wallet")
+  title               String
+  content             String
+
+  createdAt           DateTime   @default(now()) @map("created_at")
+  updatedAt           DateTime   @updatedAt @map("updated_at")
+
+  donations           Donation[]
+  favorites           Favorite[]
+  likes               Like[]
+  author              User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("posts")
+  @@index([authorId])
+  @@index([createdAt])
+  @@index([authorId, createdAt])
+}
+model Like {
+  id        String     @id @default(uuid())
+  userId    String     @map("user_id")
+  postId    String     @map("post_id")
+
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  post      Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("likes")
+  @@unique([userId, postId])
+  @@index([postId])
+  @@index([userId])
+  @@index([postId, userId])
+}
+
+model Favorite {
+  id        String     @id @default(uuid())
+  userId    String     @map("user_id")
+  postId    String     @map("post_id")
+
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  post      Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("favorites")
+  @@unique([userId, postId])
+  @@index([postId])
+  @@index([userId])
+  @@index([postId, userId])
+}
+
+model Donation {
+  id                    String         @id @default(uuid())
+  amount                Float
+  transactionHash       String?         @unique @map("transaction_hash")
+
+  status                DonationStatus
+
+  createdAt             DateTime       @default(now()) @map("created_at")
+  updatedAt             DateTime       @updatedAt @map("updated_at")
+
+  fromUserId            String         @map("from_user_id")
+  fromUserAddressWallet String         @map("from_user_address_wallet")
+  toUserId              String         @map("to_user_id")
+  toUserAddressWallet   String         @map("to_user_address_wallet")
+  postId                String         @map("post_id")
+
+  fromUser              User           @relation("donation_sender", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser                User           @relation("donation_receiver", fields: [toUserId], references: [id], onDelete: Cascade)
+  post                  Post           @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("donations")
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([postId])
+  @@index([fromUserId, toUserId, postId])
+}

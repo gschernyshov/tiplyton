@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@plugin '../src/hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --blue: #14213d;
+  --orange: #fca311;
+  --gray: #e5e5e5;
+
+  --background: var(--black);
+  --foreground: var(--gray);
+
+  --font-grotesk: var(--font-space-grotesk);
+  --font-manrope: var(--font-manrope);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --blue: #14213d;
+    --orange: #fca311;
+    --gray: #e5e5e5;
+
+    --background: var(--black);
+    --foreground: var(--gray);
+  }
+}
+
+@theme inline {
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-blue: var(--blue);
+  --color-orange: var(--orange);
+  --color-gray: var(--gray);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --font-heading: var(--font-grotesk); 
+  --font-sans: var(--font-manrope);     
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100%;
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--foreground);
+}
+
+main {
+  padding-bottom: 8rem;
+}
+h1, h2, h3, h4, h5, h6, button {
+  font-family: var(--font-grotesk);
+}
+
+.after\:bg-primary:after {
+  background: var(--black);
+}
+
+.go3974562317 {
+  background-color: var(--orange) !important;
+}
+
+@supports (-webkit-touch-callout: none) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
