@@ -21,7 +21,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: 'TiplyTon',
-  description: 'TiplyTon',
+  description: 'TiplyTon — платформа для создания и просмотра постов с возможностью донатов через TON Wallet',
 }
 
 export default async function RootLayout({
