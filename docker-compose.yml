@@ -1,17 +1,18 @@
-version: '3.8'
-
 services:
   nextjs:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - DATABASE_URL
+        - NEXTAUTH_URL
+        - AUTH_SECRET
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    env_file:
-      - .env         
-      - .env.local
+    # НЕТ volumes — не перезатираем .next
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+    env_file:
+      - .env
+      - .env.local
+    сommand: npm run start
