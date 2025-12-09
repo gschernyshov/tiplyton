@@ -66,12 +66,21 @@ export const useLogin = () => {
       } else {
         setStateError({ error: true, message: result.error })
       }
-    } catch (e) {
+    } catch {
       setStateError({ error: true, message: 'При авторизации возникла ошибка' })
     } finally {
       setIsLoadingLogin(false)
     }
-  }, [formData, updateSession])
+  }, [
+    baseImageUrlUser,
+    telegramUser?.first_name,
+    telegramUser?.last_name,
+    telegramUser?.photo_url,
+    telegramUser?.id,
+    telegramUser?.username,
+    formData, 
+    updateSession,
+  ])
 
   return {
     formData,

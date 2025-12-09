@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
       let normalizedSource
       try {
         normalizedSource = Address.parse(source).toString()
-      } catch (e) {
+      } catch {
         continue
       }
 

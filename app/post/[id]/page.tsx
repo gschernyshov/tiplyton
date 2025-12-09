@@ -22,7 +22,7 @@ const Page = () => {
   const { isTonAuth } = useTonAuthStore()
   const { connect } = useTonAuth()
 
-  if (isLoadingPost) return <CardLoading label="Загрузка поста" />
+  if (isLoadingPost) return <CardLoading />
   if (error) return <MessageError title="При загрузке поста возникла ошибка" />
   if (!dataPost) return <MessageError title="Пост не найден :(" />
 

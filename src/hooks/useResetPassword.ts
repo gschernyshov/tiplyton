@@ -50,12 +50,12 @@ export const useResetPasswordForm = () => {
       } else {
         setStateError({ error: true, message: result.error })
       }
-    } catch (e) {
+    } catch {
       setStateError({ error: true, message: 'При сбросе пароля возникла ошибка' })
     } finally {
       setIsLoadingResetPassword(false)
     }
-  }, [email])
+  }, [])
 
   return {
     isResetPassword,

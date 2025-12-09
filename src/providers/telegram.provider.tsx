@@ -1,9 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState, PropsWithChildren } from 'react'
 import { Chip } from "@heroui/chip"
 import { useTelegramStore } from '../store/telegram.store'
-import Link from 'next/link'
+import { TelegramInitDataUnsafe } from '../types/telegram'
 
 export const TelegramProvider = ({ children }: PropsWithChildren) => {
   const isReady = useTelegramStore((state) => state.isReady)
@@ -30,7 +31,7 @@ export const TelegramProvider = ({ children }: PropsWithChildren) => {
         tg.setBackgroundColor('#000000')
 
         let initData: string
-        let initDataUnsafe: any
+        let initDataUnsafe: TelegramInitDataUnsafe
 
         if (process.env.NODE_ENV === 'development') {
           const mockUser = {
@@ -47,7 +48,7 @@ export const TelegramProvider = ({ children }: PropsWithChildren) => {
           initDataUnsafe = {
             user: mockUser,
             hash: 'mock_hash_1234567890abcdef',
-            auth_date: String(Math.floor(Date.now() / 1000)),
+            auth_date: Math.floor(Date.now() / 1000),
           }
 
           console.debug('Используем мок-данные', initDataUnsafe)

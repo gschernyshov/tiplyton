@@ -123,7 +123,7 @@ export const useDonate = ({
         let parsedAddress: Address
         try {
           parsedAddress = Address.parse(authorAddressWallet)
-        } catch (e) {
+        } catch {
           throw new Error('невалидный адрес кошелька автора поста')
         }
 
@@ -217,7 +217,6 @@ export const useDonate = ({
     tonConnectUI,
     setCountDonations,
     setTotalDonations,
-    pollForConfirmation,
   ])
 
   return {

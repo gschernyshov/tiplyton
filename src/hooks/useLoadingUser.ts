@@ -42,6 +42,6 @@ export const useLoadingUser = () => {
     return () => {
       cancelled = true
     }
-  }, [userId])
+  }, [userId, handleSignOut])
 }
 

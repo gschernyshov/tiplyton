@@ -2,11 +2,7 @@
 
 import { Spinner } from '@heroui/spinner'
 
-interface IProps {
-  label: string
-}
-
-export const CardLoading = ({ label }: IProps) => {
+export const CardLoading = () => {
   return (
     <div className="flex justify-center items-center h-[60vh]">
       <Spinner color="warning" labelColor="warning" />

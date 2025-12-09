@@ -1,26 +1,21 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { useUserStore } from '../../store/user.store'
 
 export const Header = () => {
   const dataUser = useUserStore((state) => state.dataUser)
   const username = dataUser?.username
-  const [greeting, setGreeting] = useState('Привет!')
 
-  useEffect(() => {
+  const getGreeting = () => {
     const hour = new Date().getHours()
 
-    if (hour >= 5 && hour < 12) {
-      setGreeting('Доброго тебе утра')
-    } else if (hour >= 12 && hour < 18) {
-      setGreeting('Доброго тебе дня')
-    } else if (hour >= 18 && hour < 23) {
-      setGreeting('Доброго тебе вечера')
-    } else {
-      setGreeting('Доброй тебе ночи')
-    }
-  }, [])
+    if (hour >= 5 && hour < 12) return 'Доброго тебе утра'
+    if (hour >= 12 && hour < 18) return 'Доброго тебе дня'
+    if (hour >= 18 && hour < 23) return 'Доброго тебе вечера'
+    return 'Доброй тебе ночи'
+  }
+
+  const greeting = getGreeting()
 
   return (
     <div className="flex flex-col gap-1 pt-10 pb-7">

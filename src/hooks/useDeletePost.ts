@@ -47,7 +47,7 @@ export const useDeletePost = () => {
     } finally {
       setIsPendingDelete(false)
     }
-  }, [userId])
+  }, [userId, isPendingDelete])
 
   return {
     isPendingDelete,

@@ -78,7 +78,7 @@ export const useGetPosts = (
     }
     
     query()
-  }, [userId, categoryPosts])
+  }, [userId, categoryPosts, limit])
 
   const loadMorePosts = useCallback(async () => {
     if (!nextCursor || isLoadingMorePosts) return

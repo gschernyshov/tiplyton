@@ -18,7 +18,7 @@ const Page = () => {
     loadMorePosts,   
   } = useGetPosts('Все', 10)
 
-  if (isLoadingPosts) return <CardLoading label="Загрузка постов" />
+  if (isLoadingPosts) return <CardLoading />
   if (error) return <MessageError title="При загрузке постов возникла ошибка :(" />
   if (!dataPosts) return <MessageError title="Постов пока нет :(" />
 

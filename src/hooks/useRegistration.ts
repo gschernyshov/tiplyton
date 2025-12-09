@@ -72,12 +72,12 @@ export const useRegistration = () => {
       } else {
         setStateError({ error: true, message: result.error })
       }
-    } catch (e) {
+    } catch {
       setStateError({ error: true, message: 'При регистрации возникла ошибка' })
     } finally {
       setIsLoadingRegistration(false) 
     }
-  }, [formData, router])
+  }, [formData, telegramUser?.id, router])
     
   return {
     formData,

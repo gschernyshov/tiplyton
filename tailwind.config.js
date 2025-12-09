@@ -1,5 +1,6 @@
 // tailwind.config.js
-const {heroui} = require("@heroui/theme");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { heroui } = require("@heroui/theme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,7 +12,8 @@ module.exports = {
   },
   darkMode: "class",
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('tailwind-scrollbar-hide'), 
     heroui()
   ],
-};
+}

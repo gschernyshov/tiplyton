@@ -13,8 +13,6 @@ export const useTonAuth = () => {
   const [tonConnectUI] = useTonConnectUI()
   const isConnectionRestored = useIsConnectionRestored()
   const status = useTonAuthStore(state => state.status)
-
-  const [isInit, setIsInit] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const connect = useCallback(() => {
@@ -41,7 +39,6 @@ export const useTonAuth = () => {
       platform: wallet?.device.platform,
     })
     
-    setIsInit(true)
   }, [isConnectionRestored, wallet, status])
 
   useEffect(() => {
@@ -65,8 +62,7 @@ export const useTonAuth = () => {
     return () => unsub()
   }, [tonConnectUI])
 
-  return {
-    isInit,      
+  return {    
     error,       
     wallet,      
     connect,    

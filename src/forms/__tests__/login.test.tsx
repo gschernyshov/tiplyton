@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 jest.mock('@heroui/modal', () => ({
   useDisclosure: jest.fn(() => ({
     isOpen: false,
@@ -107,7 +109,7 @@ import { render, screen } from '@testing-library/react'
 import { LoginForm } from '../login'
 
 describe('LoginForm', () => {
-  const useLoginMock = require('../../hooks/useLogin').useLogin
+  const useLoginMock = jest.requireMock('../../hooks/useLogin').useLogin
 
   beforeEach(() => {
     useLoginMock.mockReset()
@@ -132,7 +134,7 @@ describe('LoginForm', () => {
   })
 
   it('должен отображать сообщение об ошибке, если stateError.error true', () => {
-    const useLoginMock = require('../../hooks/useLogin').useLogin
+    const useLoginMock = jest.requireMock('../../hooks/useLogin').useLogin
     useLoginMock.mockReturnValue({
       formData: { email: '', password: '' },
       isLoadingLogin: false,
@@ -146,7 +148,7 @@ describe('LoginForm', () => {
   })
 
   it('должен отображать модальное окно восстановления пароля', () => {
-    const useDisclosureMock = require('@heroui/modal').useDisclosure
+    const useDisclosureMock = jest.requireMock('@heroui/modal').useDisclosure
     useDisclosureMock.mockReturnValue({
       isOpen: true,
       onOpen: jest.fn(),

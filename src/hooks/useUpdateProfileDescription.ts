@@ -37,7 +37,7 @@ export const useUpdateProfileDescription = () => {
   const handleChangeDescriptionUser = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setEditDescriptionUser(prev => ({ ...prev, value }))
-    setStateError(prev => ({ error: false, message: ''}))
+    setStateError({ error: false, message: ''})
   }, [])
 
   const handleEditDescriptionUser = useCallback(async () => {

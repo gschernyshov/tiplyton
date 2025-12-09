@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState, useCallback, useMemo, ChangeEvent, FormEvent } from 'react'
+import { useState, useCallback, ChangeEvent, FormEvent } from 'react'
 import { useAuthStore } from '../store/auth.store'
 import { useTonAuthStore } from '../store/ton.store'
 import { createPost } from '../actions/create-post'
@@ -74,12 +74,12 @@ export const useCreatePost = () => {
       } else {
         setStateError({ error: true, message: result.error })
       }
-    } catch (e) {
+    } catch {
       setStateError({ error: true, message: 'При создание поста возникла ошибка. Попробуйте позже' })
     } finally {
       setIsLoadingCreatePost(false) 
     }
-  }, [formData, userId, router])
+  }, [formData, userId, wallet, router])
     
   return {
     formData,

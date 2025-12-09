@@ -42,7 +42,7 @@ export function useLike({
           setLiked(!newLiked)
           setLikesCount(prev => prev - delta)
         }
-      } catch (error) {
+      } catch {
         setLiked(!newLiked)
         setLikesCount(prev => prev - delta)
       }

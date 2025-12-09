@@ -42,7 +42,7 @@ export function useFavorite({
           setFavorited(!newFavorited)
           setFavoritesCount(prev => prev - delta)
         }
-      } catch (error) {
+      } catch {
         setFavorited(!newFavorited)
         setFavoritesCount(prev => prev - delta)
       }
