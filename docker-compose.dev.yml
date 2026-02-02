@@ -13,5 +13,4 @@ services:
       - NODE_ENV=development
     env_file:
       - .env
-      - .env.local
     command: npm run dev

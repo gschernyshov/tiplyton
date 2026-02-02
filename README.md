@@ -104,11 +104,11 @@ npm install
 Создайте файл `.env` в корне проекта:
 
 ```env
-DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=your-api-key"
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-nextauth-secret"
-RESEND_API_KEY="your-resend-api-key"
-TONCENTER_API_KEY="your-toncenter-api-key"
+DATABASE_URL=prisma+postgres://accelerate.prisma-data.net/?api_key=your-api-key
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-nextauth-secret
+RESEND_API_KEY=your-resend-api-key
+TONCENTER_API_KEY=your-toncenter-api-key
 ```
 
 4. Запуск проекта в режиме разработки:
@@ -169,5 +169,5 @@ docker-compose up --build -d
 ```env
 DATABASE_URL=
 ```
-Переменные читаются из `.env` / `.env.local`.  
+Переменные читаются из `.env`.  
 Ручной `--build-arg` не требуется.
