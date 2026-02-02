@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['config.ton.org'], // разрешаем этот хост
+    domains: ['config.ton.org'], // Разрешаем этот хост
   },
 }
 

@@ -4,9 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - DATABASE_URL
-        - NEXTAUTH_URL
-        - AUTH_SECRET
+        DATABASE_URL: ${DATABASE_URL}
     ports:
       - "3000:3000"
     # НЕТ volumes — не перезатираем .next
@@ -15,4 +13,4 @@ services:
     env_file:
       - .env
       - .env.local
-    сommand: npm run start
+    command: npm run start

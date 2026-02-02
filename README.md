@@ -91,7 +91,7 @@ public/               # Статические ресурсы (изображе�
 
 ```bash
 git clone https://github.com/gschernyshov/tiplyton
-cd TiplyTon
+cd tiplyton
 ```
 
 2. Устанавливаем зависимости:
@@ -126,5 +126,48 @@ npm run dev
 | Команда | Описание |
 |---------|----------|
 | `dev` | Запуск проекта в режиме разработки |
+| `dev:docker` | Запуск в Docker (dev-окружение): `docker-compose -f docker-compose.dev.yml up --build` |
 | `build` | Генерация Prisma Client и сборка проекта для продакшена |
 | `start` | Запуск проекта в продакшен режиме |
+| `lint` | Проверка кода через ESLint |
+| `test` | Запуск тестов (Jest) |
+| `test:watch` | Запуск тестов в режиме наблюдения |
+| `test:coverage` | Запуск тестов с отчётом о покрытии кода |
+
+---
+
+## 🐳 Docker
+
+Проект поддерживает запуск через Docker Compose для development, test и production окружений.
+
+### Development
+```bash
+docker-compose -f docker-compose.dev.yml up --build
+```
+- Hot reload
+- `NODE_ENV=development`
+- `npm run dev`
+- `http://localhost:3000`
+
+### Tests
+```bash
+docker-compose -f docker-compose.test.yml up --build
+```
+- Изолированный запуск тестов
+- `npm run test`
+
+### Production
+```bash
+docker-compose up --build -d
+```
+- Multi-stage Dockerfile
+- Без volumes
+- `NODE_ENV=production`
+- `npm run start`
+
+**Build-time переменные окружения** используются на этапе сборки (`npm run build`) и автоматически подхватываются Docker Compose:
+```env
+DATABASE_URL=
+```
+Переменные читаются из `.env` / `.env.local`.  
+Ручной `--build-arg` не требуется.
